@@ -1,0 +1,12 @@
+document.getElementById('add-btn').addEventListener('click',function(){
+    console.log('Clicked')
+    showSectionByID('add-form');
+})
+document.getElementById('cash-out-btn').addEventListener('click',function(){
+    console.log('Clicked')
+    showSectionByID('cash-out-form');
+})
+document.getElementById('btn-trans').addEventListener('click',function(){
+    console.log('Clicked')
+    showSectionByID('trans-form');
+})

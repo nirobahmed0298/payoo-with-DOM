@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payoo Home</title>
+    <!-- Daisy -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <main class="flex justify-center">
+        <div class="mockup-phone">
+            <div class="camera"></div>
+            <div class="display">
+                <div class="artboard artboard-demo phone-3">
+                    <div class="stats shadow">
+                        <div class="stat">
+                            <div id="total-amount" class="stat-value w-2 ">9400</div>
+                            <div class="stat-desc">Available Money</div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="space-y-4">
+                        <button id="add-btn" class="btn btn-lg">Add Money</button>
+                        <button id="cash-out-btn" class="btn btn-lg">Cash Out</button>
+                        <br>
+                        <button id="btn-trans" class="btn btn-primary text-center">Transactions</button>
+                    </div>
+                    <div class="divider"></div>
+                    <!-- Add MOney section -->
+                    <div id="add-form" class=" card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                        <form class="card-body">
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Account Number</span>
+                                </label>
+                                <input id="phone-num" type="text" placeholder="Enter 11 Digit Number"
+                                    class="input input-bordered" required />
+                            </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Add Amount</span>
+                                </label>
+                                <input id="amount" type="text" placeholder="Amount" class="input input-bordered"
+                                    required />
+                            </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Pin</span>
+                                </label>
+                                <input id="pin-num" type="password" placeholder="Enter 4 Digit Pin"
+                                    class="input input-bordered" required />
+                            </div>
+                            <div class="form-control mt-6">
+                                <button id="btn-add-money" class="btn btn-primary">Add Money</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Cash Out Section -->
+                    <div id="cash-out-form" class="hidden card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                        <form class="card-body">
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Account Number</span>
+                                </label>
+                                <input id="num" type="text" placeholder="Enter 11 Digit Number"
+                                    class="input input-bordered" required />
+                            </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Cash Out Amount</span>
+                                </label>
+                                <input id="cash-out" type="text" placeholder="Amount" class="input input-bordered"
+                                    required />
+                            </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Pin</span>
+                                </label>
+                                <input id="pin" type="password" placeholder="Enter 4 Digit Pin"
+                                    class="input input-bordered" required />
+                            </div>
+                            <div class="form-control mt-6">
+                                <button id="btn-cash-out" class="btn btn-error">Cash Out</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="trans-form" class="hidden text-center text-xl">
+                        <h2>Transactions History</h2>
+                        <div class="divider"></div>
+                        <div id="transaction-container">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- <script>
+        document.getElementById('btn-add-money').addEventListener('click', function (event) {
+            event.preventDefault();
+            let number = document.getElementById('phone-num').value;
+            let amount = document.getElementById('amount').value;
+            let pin = document.getElementById('pin-num').value;
+            let tatalAmount = document.getElementById('total-amount').innerText;
+            if (number === '01926002688' && pin === '1234') {
+                let addMoney = parseFloat(amount);
+                let totalMoney = parseFloat(tatalAmount);
+                let availableMoney = addMoney + totalMoney;
+                document.getElementById('total-amount').innerText = availableMoney;
+            }
+            else {
+                alert('Wrong your Number or Pin')
+            }
+        });
+        // Cash Out Section
+        document.getElementById('btn-cash-out').addEventListener('click', function (event) {
+            event.preventDefault();
+            let number = document.getElementById('num').value;
+            let amount = document.getElementById('cash-out').value;
+            let pin = document.getElementById('pin').value;
+            let tatalAmount = document.getElementById('total-amount').innerText;
+            if (number === '01926002688' && pin === '1234') {
+                let cashOut = parseFloat(amount);
+                let totalMoney = parseFloat(tatalAmount);
+                let FinalMoney = totalMoney - cashOut;
+                document.getElementById('total-amount').innerText = FinalMoney;
+            }
+            else {
+                alert('Wrong your Number or Pin')
+            }
+        });
+
+        // Toggle Add Button and cash out button.
+
+        document.getElementById('cash-out-btn').addEventListener('click', function (event) {
+            document.getElementById('cash-out-form').classList.remove('hidden');
+            document.getElementById('add-form').classList.add('hidden');
+        });
+        // Add Btn
+        document.getElementById('add-btn').addEventListener('click', function (event) {
+            document.getElementById('add-form').classList.remove('hidden');
+            document.getElementById('cash-out-form').classList.add('hidden');
+        });
+
+    </script> -->
+    <script src="./utilities.js"></script>
+    <script>
+        document.getElementById('btn-add-money').addEventListener('click', function (event) {
+            event.preventDefault();
+            let inputValue = getInputValue('amount');
+            let inputPin = getInputValue('pin-num');
+            let currentMoney = getText('total-amount');
+            if(isNaN(inputValue)){
+                alert('Not Add Money')
+                return;
+            }
+            if (inputPin === 1234) {
+                let newBalance = currentMoney + inputValue;
+                document.getElementById('total-amount').innerText = newBalance;
+                let p = document.createElement('p');
+                p.style.backgroundColor='green'
+                p.innerText = `Added Money : ${inputValue} Tk. New Balance: ${newBalance} Tk.`
+                console.log(p)
+                document.getElementById('transaction-container').appendChild(p);
+            }
+            else {
+                alert('Wrong Number or pin')
+            }
+
+        })
+        // Cash Out Section
+        document.getElementById('btn-cash-out').addEventListener('click', function (event) {
+            event.preventDefault();
+            let inputValue = getInputValue('cash-out');
+            let cashOutPin = getInputValue('pin');
+            let currentValue = getText('total-amount');
+            if(inputValue > currentValue){
+                alert('You do not enough balance')
+                return;
+            }
+            if (cashOutPin === 1234) {
+                let cashOut = currentValue - inputValue;
+                document.getElementById('total-amount').innerText = cashOut;
+                let p = document.createElement('p');
+                p.style.backgroundColor='red'
+                p.innerText = `Cash Out : ${inputValue} Tk. New Balance: ${cashOut} Tk.`
+                document.getElementById('transaction-container').appendChild(p);
+            }
+            // Features
+        })
+    </script>
+    <script src="./featuers.js"></script>
+</body>
+
+</html>
